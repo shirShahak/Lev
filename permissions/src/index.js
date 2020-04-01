@@ -5,7 +5,6 @@ import App from './App';
 import RTL from './RTL';
 
 ReactDOM.render(
-  <App/>,
-  //<RTL><App /></RTL>,
+  <RTL><App /></RTL>,
   document.getElementById('root')
 );

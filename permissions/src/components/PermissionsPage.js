@@ -1,4 +1,5 @@
 import React from "react";
+import PermissionsUserForm from "./PermissionsUserForm";
 import PermissionsForm from "./PermissionsForm";
 import "./PermissionsPage.css";
 
@@ -8,7 +9,7 @@ class PermissionsPage extends React.Component {
       <div className="perm-grid">
         <div className="perm-header">עמוד הרשאות</div>
         <div className="perm-form"><PermissionsForm/></div>
-        <div className="perm-user-form">פרטי משתמש</div>
+        <div className="perm-user-form"><PermissionsUserForm/></div>
       </div>
     );
   }

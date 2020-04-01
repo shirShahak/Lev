@@ -4,10 +4,12 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   overflow-y: scroll;
+  padding: 1rem;
 }
 .perm-category {
   background-color: white;
-  width: 15rem;
+  width: 27%;
+  min-width: 220px;
   margin: 0.5rem;
   box-shadow: 1px 1px 4px #aaa;
   border-radius: 5px;
@@ -17,7 +19,7 @@
 .category-title .MuiTypography-body1{
   padding: 0.5rem;
   font-weight: 700 !important;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .perm-category > * > label {

@@ -12,7 +12,6 @@
 
 .perm-user-form {
   grid-area: user;
-  background-color : darkgoldenrod;
 }
 .perm-grid {
   display: grid;

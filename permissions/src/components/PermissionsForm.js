@@ -2,9 +2,7 @@ import React from "react";
 import {
   Checkbox,
   FormGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel
+  FormControlLabel
 } from "@material-ui/core";
 import { LibraryAddCheck, LibraryAddCheckOutlined } from "@material-ui/icons";
 import "./PermissionsForm.css";
@@ -32,12 +30,12 @@ export default function PermissionsForm() {
               onChange={handleChange}
               icon={
                 state.checkedA || state.checkedB ? (
-                  <LibraryAddCheckOutlined color="secondary" />
+                  <LibraryAddCheckOutlined color="primary" />
                 ) : (
                   <LibraryAddCheckOutlined />
                 )
               }
-              checkedIcon={<LibraryAddCheck />}
+              checkedIcon={<LibraryAddCheck color="primary" />}
             />
           }
           label="קטגוריה "
@@ -50,6 +48,7 @@ export default function PermissionsForm() {
                 checked={state.checkedA}
                 name="checkedA"
                 onChange={handleChange}
+                color="primary"
               />
             }
             label="shir "
@@ -60,6 +59,7 @@ export default function PermissionsForm() {
                 checked={state.checkedB}
                 name="checkedB"
                 onChange={handleChange}
+                color="primary"
               />
             }
             label="shir shahak"
@@ -70,6 +70,7 @@ export default function PermissionsForm() {
                 checked={state.checkedC}
                 name="checkedC"
                 onChange={handleChange}
+                color="primary"
               />
             }
             label=" shahak"
@@ -80,25 +81,6 @@ export default function PermissionsForm() {
   };
   return (
     <>
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
       {renderSingle()}
       {renderSingle()}
       {renderSingle()}
