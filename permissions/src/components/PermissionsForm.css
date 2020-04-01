@@ -1,22 +1,33 @@
 .perm-form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow-y: scroll;
+}
+.perm-category {
+  background-color: white;
+  width: 15rem;
+  margin: 0.5rem;
+  box-shadow: 1px 1px 4px #aaa;
+  border-radius: 5px;
+  padding: 0.5rem;
 }
 
-.perm-category{
-    background-color: white;
-    width: 15rem;
-    margin: 0.5rem;
-    box-shadow: 1px 1px 4px #aaa;
-    border-radius: 5px;
-    padding: 0.5rem;
+.category-title .MuiTypography-body1{
+  padding: 0.5rem;
+  font-weight: 700 !important;
+  font-size: 1rem;
 }
-.category-title {
-    padding: 0.5rem;
+
+.perm-category > * > label {
+  height: 2rem;
 }
-.perm-category > * > label{
-height: 2rem;
+
+.MuiTypography-body1{
+    font-family: "Heebo", sans-serif !important;
+}
+
+.MuiFormControlLabel-root{
+    margin: 0 !important;
 }

@@ -6,11 +6,12 @@ import {
   FormControl,
   FormLabel
 } from "@material-ui/core";
-
+import { LibraryAddCheck, LibraryAddCheckOutlined } from "@material-ui/icons";
 import "./PermissionsForm.css";
 
 export default function PermissionsForm() {
   const [state, setState] = React.useState({
+    checked1: true,
     checkedA: true,
     checkedB: true,
     checkedC: false
@@ -22,7 +23,25 @@ export default function PermissionsForm() {
   const renderSingle = () => {
     return (
       <div className="perm-category">
-        <div className="category-title">קטגוריה</div>
+        <FormControlLabel
+          className="category-title"
+          control={
+            <Checkbox
+              checked={state.checked1}
+              name="checked1"
+              onChange={handleChange}
+              icon={
+                state.checkedA || state.checkedB ? (
+                  <LibraryAddCheckOutlined color="secondary" />
+                ) : (
+                  <LibraryAddCheckOutlined />
+                )
+              }
+              checkedIcon={<LibraryAddCheck />}
+            />
+          }
+          label="קטגוריה "
+        />
 
         <FormGroup>
           <FormControlLabel

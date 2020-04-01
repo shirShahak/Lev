@@ -1,7 +1,7 @@
 body {
   background-color: #eff0f9;
   margin: 0;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Heebo', sans-serif !important;
   
 }
 html , body, #root, .App, .App > *{
