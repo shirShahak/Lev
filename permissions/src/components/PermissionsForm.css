@@ -1,0 +1,22 @@
+.perm-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow-y: scroll;
+}
+
+.perm-category{
+    background-color: white;
+    width: 15rem;
+    margin: 0.5rem;
+    box-shadow: 1px 1px 4px #aaa;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+.category-title {
+    padding: 0.5rem;
+}
+.perm-category > * > label{
+height: 2rem;
+}

@@ -1,0 +1,24 @@
+.perm-header {
+  grid-area: header;
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.perm-form {
+  grid-area: content;
+}
+
+.perm-user-form {
+  grid-area: user;
+  background-color : darkgoldenrod;
+}
+.perm-grid {
+  display: grid;
+  grid-auto-rows: 10% auto;
+  grid-auto-columns: 2fr 1fr;
+  grid-template-areas:
+    "header header"
+    "content user";
+}

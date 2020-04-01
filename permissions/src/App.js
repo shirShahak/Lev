@@ -1,12 +1,11 @@
 import React from 'react';
+import PermissionsPage from './components/PermissionsPage';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-          Learn React
-      </header>
+      <PermissionsPage/>
     </div>
   );
 }
