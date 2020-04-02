@@ -1,6 +1,22 @@
 .perm-user-form {
-padding: 1rem;
+  padding: 1rem;
 }
-.MuiFormControl-root{
-    margin: 5px !important;
+
+.perm-user-form .MuiFormControl-root {
+  margin: 5px !important;
+}
+
+.perm-user-form button {
+  float: left;
+  margin-top: 5rem;
+}
+
+.perm-user-form svg {
+  transform: rotate(180deg);
+}
+
+.username {
+  padding: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
 }

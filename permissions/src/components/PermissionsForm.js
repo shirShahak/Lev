@@ -1,95 +1,123 @@
 import React from "react";
-import {
-  Checkbox,
-  FormGroup,
-  FormControlLabel
-} from "@material-ui/core";
+import { Checkbox, FormGroup, FormControlLabel } from "@material-ui/core";
 import { LibraryAddCheck, LibraryAddCheckOutlined } from "@material-ui/icons";
 import "./PermissionsForm.css";
 
 export default function PermissionsForm() {
+  // stub
   const [state, setState] = React.useState({
-    checked1: true,
-    checkedA: true,
-    checkedB: true,
-    checkedC: false
+    "מוצרי חלב": {
+      גבינה: false,
+      חלב: false,
+      קוטג: false,
+      שוקו: false,
+      יוגורט: false
+    },
+    ירקות: {
+      מלפפון: false,
+      עגבניה: false,
+      גזר: false
+    },
+    "לחמים ומאפים": {
+      לחמניות: false,
+      פיתות: false,
+      חלות: false,
+      לחמים: false
+    }
   });
-  const handleChange = event => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+
+  // toggle all in category
+  const categoryChange = event => {
+    const permissions = {};
+
+    Object.keys(state[event.target.name]).forEach(key => {
+      permissions[key] = event.target.checked;
+    });
+
+    setState(prev => {
+      return {
+        ...prev,
+        [event.target.name]: { ...permissions }
+      };
+    });
+
+    console.log([event.target.name], event.target.checked);
   };
 
-  const renderSingle = () => {
+  const handleChange = (category, { target }) => {
+    setState(prev => {
+      return {
+        ...prev,
+        [category]: {
+          ...prev[category],
+          [target.name]: target.checked
+        }
+      };
+    });
+    console.log([target.name], target.checked);
+  };
+
+  const renderSingle = name => {
+    var checked = true;
+    var marked = false; 
+
+    Object.keys(state[name]).forEach(key => {
+      checked = checked && state[name][key];
+      marked = marked || state[name][key];
+    });
+
+    console.log(checked);
+    console.log(marked);
+
     return (
       <div className="perm-category">
-        <FormControlLabel
-          className="category-title"
-          control={
-            <Checkbox
-              checked={state.checked1}
-              name="checked1"
-              onChange={handleChange}
-              icon={
-                state.checkedA || state.checkedB ? (
-                  <LibraryAddCheckOutlined color="primary" />
-                ) : (
-                  <LibraryAddCheckOutlined />
-                )
-              }
-              checkedIcon={<LibraryAddCheck color="primary" />}
-            />
-          }
-          label="קטגוריה "
-        />
-
         <FormGroup>
           <FormControlLabel
+            className="category-title"
             control={
               <Checkbox
-                checked={state.checkedA}
-                name="checkedA"
-                onChange={handleChange}
-                color="primary"
+                checked={checked}
+                name={name}
+                onChange={categoryChange}
+                icon={
+                  marked ? (
+                    <LibraryAddCheckOutlined color="primary" />
+                  ) : (
+                    <LibraryAddCheckOutlined />
+                  )
+                }
+                checkedIcon={<LibraryAddCheck color="primary" />}
               />
             }
-            label="shir "
+            label={name}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.checkedB}
-                name="checkedB"
-                onChange={handleChange}
-                color="primary"
+          {Object.keys(state[name]).map(key => {
+            return (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state[name][key]}
+                    name={key}
+                    onChange={e => handleChange(name, e)}
+                    color="primary"
+                  />
+                }
+                label={key}
               />
-            }
-            label="shir shahak"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.checkedC}
-                name="checkedC"
-                onChange={handleChange}
-                color="primary"
-              />
-            }
-            label=" shahak"
-          />
+            );
+          })}
         </FormGroup>
       </div>
     );
   };
   return (
     <>
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
-      {renderSingle()}
+      {renderSingle("ירקות")}
+      {renderSingle("מוצרי חלב")}
+      {renderSingle("לחמים ומאפים")}
+      {renderSingle("ירקות")}
+      {renderSingle("מוצרי חלב")}
+      {renderSingle("לחמים ומאפים")}
     </>
   );
 }
