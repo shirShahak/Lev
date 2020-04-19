@@ -23,21 +23,27 @@ export default function PermissionsForm() {
       פיתות: false,
       חלות: false,
       לחמים: false
-    }
+    },
+    "בשר, עוף ודגים": {
+      "עוף טחון": false,
+      "בשר טחון": false,
+      "חזה עוף": false,
+      דג: false
+    },
   });
 
   // toggle all in category
-  const categoryChange = event => {
-    const permissions = {};
+  const categoryChange = (event) => {
+    const permissions = {}; 
 
-    Object.keys(state[event.target.name]).forEach(key => {
+    Object.keys(state[event.target.name]).forEach((key) => {
       permissions[key] = event.target.checked;
     });
 
-    setState(prev => {
+    setState((prev) => {
       return {
         ...prev,
-        [event.target.name]: { ...permissions }
+        [event.target.name]: { ...permissions },
       };
     });
 
@@ -45,25 +51,25 @@ export default function PermissionsForm() {
   };
 
   const handleChange = (category, { target }) => {
-    setState(prev => {
+    setState((prev) => {
       return {
         ...prev,
         [category]: {
           ...prev[category],
           [target.name]: target.checked
-        }
+        },
       };
     });
     console.log([target.name], target.checked);
   };
 
-  const renderSingle = name => {
+  const renderCategory = (categoryName) => {
     var checked = true;
-    var marked = false; 
+    var marked = false;
 
-    Object.keys(state[name]).forEach(key => {
-      checked = checked && state[name][key];
-      marked = marked || state[name][key];
+    Object.keys(state[categoryName]).forEach((key) => {
+      checked = checked && state[categoryName][key]; // if all checked
+      marked = marked || state[categoryName][key]; // if at least one is checked
     });
 
     console.log(checked);
@@ -77,7 +83,7 @@ export default function PermissionsForm() {
             control={
               <Checkbox
                 checked={checked}
-                name={name}
+                name={categoryName}
                 onChange={categoryChange}
                 icon={
                   marked ? (
@@ -89,16 +95,16 @@ export default function PermissionsForm() {
                 checkedIcon={<LibraryAddCheck color="primary" />}
               />
             }
-            label={name}
+            label={categoryName}
           />
-          {Object.keys(state[name]).map(key => {
+          {Object.keys(state[categoryName]).map((key) => {
             return (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state[name][key]}
+                    checked={state[categoryName][key]}
                     name={key}
-                    onChange={e => handleChange(name, e)}
+                    onChange={(e) => handleChange(categoryName, e)}
                     color="primary"
                   />
                 }
@@ -112,12 +118,9 @@ export default function PermissionsForm() {
   };
   return (
     <>
-      {renderSingle("ירקות")}
-      {renderSingle("מוצרי חלב")}
-      {renderSingle("לחמים ומאפים")}
-      {renderSingle("ירקות")}
-      {renderSingle("מוצרי חלב")}
-      {renderSingle("לחמים ומאפים")}
+      {Object.keys(state).map((key) => {
+        return renderCategory(key);
+      })}
     </>
   );
 }

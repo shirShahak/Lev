@@ -1,6 +1,8 @@
 import React from 'react';
-import PermissionsPage from './components/PermissionsPage';
+
+import PermissionsPage from './PermissionsPage';
 import './App.css';
+
 
 function App() {
   return (
