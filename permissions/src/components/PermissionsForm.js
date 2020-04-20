@@ -1,114 +1,69 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Checkbox, FormGroup, FormControlLabel } from "@material-ui/core";
 import { LibraryAddCheck, LibraryAddCheckOutlined } from "@material-ui/icons";
+import {
+  getPermissions,
+  togglePermission,
+  toggleCategory
+} from "../actions/permissionsActions";
 import "./PermissionsForm.css";
 
-export default function PermissionsForm() {
-  // stub
-  const [state, setState] = React.useState({
-    "מוצרי חלב": {
-      גבינה: false,
-      חלב: false,
-      קוטג: false,
-      שוקו: false,
-      יוגורט: false
-    },
-    ירקות: {
-      מלפפון: false,
-      עגבניה: false,
-      גזר: false
-    },
-    "לחמים ומאפים": {
-      לחמניות: false,
-      פיתות: false,
-      חלות: false,
-      לחמים: false
-    },
-    "בשר, עוף ודגים": {
-      "עוף טחון": false,
-      "בשר טחון": false,
-      "חזה עוף": false,
-      דג: false
-    },
-  });
+class PermissionsForm extends React.Component {
 
   // toggle all in category
-  const categoryChange = (event) => {
-    const permissions = {}; 
-
-    Object.keys(state[event.target.name]).forEach((key) => {
-      permissions[key] = event.target.checked;
-    });
-
-    setState((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: { ...permissions },
-      };
-    });
-
-    console.log([event.target.name], event.target.checked);
+  categoryChange = ({ target }) => {
+    this.props.toggleCategory(this.props.permissions[target.name], target);
   };
 
-  const handleChange = (category, { target }) => {
-    setState((prev) => {
-      return {
-        ...prev,
-        [category]: {
-          ...prev[category],
-          [target.name]: target.checked
-        },
-      };
-    });
-    console.log([target.name], target.checked);
+  handleChange = (categoryName, { target }) => {
+    this.props.togglePermission(this.props.permissions[categoryName], categoryName, target);
   };
 
-  const renderCategory = (categoryName) => {
+  renderCategory = (categoryName, index) => {
     var checked = true;
     var marked = false;
 
-    Object.keys(state[categoryName]).forEach((key) => {
-      checked = checked && state[categoryName][key]; // if all checked
-      marked = marked || state[categoryName][key]; // if at least one is checked
+    Object.keys(this.props.permissions[categoryName]).forEach((key) => {
+      checked = checked && this.props.permissions[categoryName][key]; // if all checked
+      marked = marked || this.props.permissions[categoryName][key]; // if at least one is checked
     });
 
-    console.log(checked);
-    console.log(marked);
-
     return (
-      <div className="perm-category">
+      <div className='perm-category' key={index}>
         <FormGroup>
           <FormControlLabel
-            className="category-title"
+            className='category-title'
             control={
               <Checkbox
                 checked={checked}
                 name={categoryName}
-                onChange={categoryChange}
+                onChange={this.categoryChange}
                 icon={
                   marked ? (
-                    <LibraryAddCheckOutlined color="primary" />
+                    <LibraryAddCheckOutlined color='primary' />
                   ) : (
                     <LibraryAddCheckOutlined />
                   )
                 }
-                checkedIcon={<LibraryAddCheck color="primary" />}
+                checkedIcon={<LibraryAddCheck color='primary' />}
               />
             }
             label={categoryName}
           />
-          {Object.keys(state[categoryName]).map((key) => {
+          {Object.keys(this.props.permissions[categoryName]).map((key, i) => {
             return (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={state[categoryName][key]}
+                    checked={this.props.permissions[categoryName][key]}
                     name={key}
-                    onChange={(e) => handleChange(categoryName, e)}
-                    color="primary"
+                    onChange={(e) => this.handleChange(categoryName, e)}
+                    color='primary'
                   />
                 }
                 label={key}
+                key={i}
               />
             );
           })}
@@ -116,11 +71,32 @@ export default function PermissionsForm() {
       </div>
     );
   };
-  return (
-    <>
-      {Object.keys(state).map((key) => {
-        return renderCategory(key);
-      })}
-    </>
-  );
+
+  componentDidMount() {
+    this.props.getPermissions();
+  }
+
+  render() {
+    if (this.props.permissions === null) {
+      return null;
+    }
+
+    return (
+      <>
+        {Object.keys(this.props.permissions).map((key, index) => {
+          return this.renderCategory(key, index);
+        })}
+      </>
+    );
+  }
 }
+
+const mapStateToProps = (state) => {
+  return { permissions: state.permissions };
+};
+
+export default connect(mapStateToProps, {
+  getPermissions,
+  togglePermission,
+  toggleCategory
+})(PermissionsForm);
