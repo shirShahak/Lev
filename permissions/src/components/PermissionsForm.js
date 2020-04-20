@@ -10,14 +10,17 @@ import {
 import "./PermissionsForm.css";
 
 class PermissionsForm extends React.Component {
-
   // toggle all in category
   categoryChange = ({ target }) => {
     this.props.toggleCategory(this.props.permissions[target.name], target);
   };
 
   handleChange = (categoryName, { target }) => {
-    this.props.togglePermission(this.props.permissions[categoryName], categoryName, target);
+    this.props.togglePermission(
+      this.props.permissions[categoryName],
+      categoryName,
+      target
+    );
   };
 
   renderCategory = (categoryName, index) => {
@@ -92,7 +95,7 @@ class PermissionsForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { permissions: state.permissions };
+  return { permissions: state.permissionsReducer.permissions };
 };
 
 export default connect(mapStateToProps, {

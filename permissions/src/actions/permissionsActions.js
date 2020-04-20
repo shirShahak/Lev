@@ -1,3 +1,10 @@
+export const sendPermissionsRequest = (userDetails) => {
+    return {
+      type: "SEND_PERMISSIONS",
+      payload: {userDetails}
+    };
+  };
+
 export const togglePermission = (currPermissions, categoryName, target) => {
   return {
     type: "TOGGLE_PERMISSION",

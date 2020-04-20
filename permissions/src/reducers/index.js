@@ -1,6 +1,9 @@
-import {combineReducers} from 'redux';
-import {permissionsReducer} from './permissionsReducer';
+import { combineReducers } from "redux";
+import { permissionsReducer } from "./permissionsReducer";
 
 export default combineReducers({
-    permissions : permissionsReducer
+  username: () => {
+    return "שיר שחק";
+  },
+  permissionsReducer: permissionsReducer,
 });
