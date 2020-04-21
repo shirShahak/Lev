@@ -1,9 +1,11 @@
-export const sendPermissionsRequest = (userDetails) => {
-    return {
-      type: "SEND_PERMISSIONS",
-      payload: {userDetails}
-    };
-  };
+// export const sendPermissionsRequest = (username, data) => {
+// // call server side api with data
+  
+//     return {
+//       type: "SEND_PERMISSIONS",
+//       payload: {data}
+//     };
+//   };
 
 export const togglePermission = (currPermissions, categoryName, target) => {
   return {

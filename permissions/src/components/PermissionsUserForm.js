@@ -6,15 +6,34 @@ import {
   TextField,
   FormHelperText
 } from "@material-ui/core";
-import { sendPermissionsRequest } from "../actions/permissionsActions";
-import { Send, SentimentSatisfied } from "@material-ui/icons";
+import { Send } from "@material-ui/icons";
 import "./PermissionsUserForm.css";
+import XLSX from "xlsx";
 
 function PermissionsUserForm(props) {
-  const [state, setState] = useState({ phone: "", email: "" });
+  const [userDetails, setUserDetails] = useState({ phone: "", email: "" });
+
   const send = () => {
-    console.log(state);
-    props.sendPermissionsRequest(); //* לשמור את השדות כמשתנים ולשלוח אותם
+    let data = [];
+
+    // convert data to simple array
+    Object.keys(props.permissions).forEach((categoryName) => {
+      Object.keys(props.permissions[categoryName]).forEach((permissionName) => {
+        if (props.permissions[categoryName][permissionName] === true)
+          data = [...data, { "שם הרשאה:": permissionName }];
+      });
+    });
+
+    // WRITE TO EXCEL
+    var worksheet = XLSX.utils.json_to_sheet(data);
+    var new_workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(new_workbook, worksheet, "הרשאות");
+    XLSX.writeFile(new_workbook, `${props.username}.xlsb`);
+
+    // props.sendPermissionsRequest(props.username, {
+    //   userDetails,
+    //   permissions: props.permissions
+    // });
   };
 
   return (
@@ -26,9 +45,13 @@ function PermissionsUserForm(props) {
           id='phone'
           label='מספר טלפון'
           color={"primary"}
-          value={state.phone}
-          error={state.phone !== "" && !/^[0-9]*$/i.test(state.phone)}
-          onChange={(e) => setState({ ...state, phone: e.target.value })}
+          value={userDetails.phone}
+          error={
+            userDetails.phone !== "" && !/^[0-9]*$/i.test(userDetails.phone)
+          }
+          onChange={(e) =>
+            setUserDetails({ ...userDetails, phone: e.target.value })
+          }
         />
       </FormControl>
       <FormControl>
@@ -37,18 +60,17 @@ function PermissionsUserForm(props) {
           id='email'
           label='מייל'
           color='primary'
-          value={state.email}
+          value={userDetails.email}
           error={
-            state.email !== "" &&
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(state.email)
+            userDetails.email !== "" &&
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(userDetails.email)
           }
-          onChange={(e) => setState({ ...state, email: e.target.value })}
+          onChange={(e) =>
+            setUserDetails({ ...userDetails, email: e.target.value })
+          }
         />
         <FormHelperText id='component-helper-text'>
           העתק את כתובת המייל כמו שהיא רשומה ב outlook שלך
-          {/* 
-          {values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)} */}
         </FormHelperText>
       </FormControl>
       <Button
@@ -64,9 +86,10 @@ function PermissionsUserForm(props) {
 }
 
 const mapStateToProps = (state) => {
-  return { username: state.username };
+  return {
+    username: state.username,
+    permissions: state.permissionsReducer.permissions
+  };
 };
 
-export default connect(mapStateToProps, {
-  sendPermissionsRequest
-})(PermissionsUserForm);
+export default connect(mapStateToProps)(PermissionsUserForm);

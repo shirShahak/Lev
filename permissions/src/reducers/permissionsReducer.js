@@ -19,8 +19,10 @@ export const permissionsReducer = (
       ...permissionsDetails,
       permissions: { ...permissionsDetails.permissions, ...action.payload }
     };
-  else if (action.type === "SEND_PERMISSIONS")
-    return { ...permissionsDetails, userDetails: { ...action.payload } };
+  else if (action.type === "SEND_PERMISSIONS") return action.payload;
+
+  // else if (action.type === "SEND_PERMISSIONS")
+  //   return { ...permissionsDetails, userDetails: { ...action.payload } };
 
   return permissionsDetails;
 };
