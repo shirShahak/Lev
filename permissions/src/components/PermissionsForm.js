@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Checkbox, FormGroup, FormControlLabel } from "@material-ui/core";
-import { LibraryAddCheck, LibraryAddCheckOutlined } from "@material-ui/icons";
+import {
+  LibraryAddCheck,
+  LibraryAddCheckOutlined,
+  FilterNone
+} from "@material-ui/icons";
 import {
   getPermissions,
   togglePermission,
@@ -15,17 +19,17 @@ class PermissionsForm extends React.Component {
     this.props.toggleCategory(this.props.permissions[target.name], target);
   };
 
-  handleChange = (categoryName, { target }) => {
+  handleChange = ({ target }) => {
     this.props.togglePermission(
-      this.props.permissions[categoryName],
-      categoryName,
+      this.props.permissions[target.value],
+      target.value,
       target
     );
   };
 
   renderCategory = (categoryName, index) => {
-    var checked = true;
-    var marked = false;
+    let checked = true;
+    let marked = false;
 
     Object.keys(this.props.permissions[categoryName]).forEach((key) => {
       checked = checked && this.props.permissions[categoryName][key]; // if all checked
@@ -46,7 +50,7 @@ class PermissionsForm extends React.Component {
                   marked ? (
                     <LibraryAddCheckOutlined color='primary' />
                   ) : (
-                    <LibraryAddCheckOutlined />
+                    <FilterNone />
                   )
                 }
                 checkedIcon={<LibraryAddCheck color='primary' />}
@@ -61,7 +65,8 @@ class PermissionsForm extends React.Component {
                   <Checkbox
                     checked={this.props.permissions[categoryName][key]}
                     name={key}
-                    onChange={(e) => this.handleChange(categoryName, e)}
+                    value={categoryName}
+                    onChange={this.handleChange}
                     color='primary'
                   />
                 }
