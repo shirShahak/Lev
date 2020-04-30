@@ -1,0 +1,8 @@
+.archive-page{
+    text-align: center;
+    width: 90%;
+}
+
+.archive-page svg {
+    transform: rotate(180deg);
+  }
