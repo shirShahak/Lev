@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ArchivePage from './ArchivePage';
-import './App.css';
 
 
 function App() {
