@@ -1,13 +1,13 @@
 import React from 'react';
 
-import PermissionsPage from './PermissionsPage';
+import ArchivePage from './ArchivePage';
 import './App.css';
 
 
 function App() {
   return (
-    <div className="App">4
-      <PermissionsPage/>
+    <div className="App">
+      <ArchivePage/>
     </div>
   );
 }
