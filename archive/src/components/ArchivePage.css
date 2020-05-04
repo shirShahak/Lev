@@ -1,8 +1,17 @@
-.archive-page{
-    text-align: center;
-    width: 90%;
+.archive-page {
+  text-align: center;
+  margin: 4vh auto;
+  width: 80vw;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem 2rem;
 }
 
 .archive-page svg {
-    transform: rotate(180deg);
-  }
+  transform: rotate(180deg);
+}
+
+.MuiExpansionPanel-root {
+  margin: 2rem auto !important;
+  width: 60%;
+}
