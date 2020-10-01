@@ -1,0 +1,17 @@
+.app-bar {
+  max-height: 10vh;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  padding: 1vh 5vw;
+}
+.versions-list {
+  overflow-y: auto;
+  max-width: 30vw;
+  max-height: 40vh;
+}
+.version-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

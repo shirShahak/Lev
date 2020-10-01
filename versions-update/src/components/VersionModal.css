@@ -1,0 +1,16 @@
+.version-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.version-card {
+  max-width: 40vw;
+  max-height: 75vh;
+  overflow-y: auto !important;
+}
+
+.version-card-media {
+  min-height: 50vh;
+}
